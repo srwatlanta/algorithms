@@ -1,27 +1,21 @@
-const minSubArrayLen = (arr, num) => {
-    let min = Infinity
-    let i = 0
-    let j = 1
-    let total = arr[i] + arr[j]
-    
-    if ((arr[i] || arr[-1]) > num) {
-      return 1
+const minSubArrayLength = (arr, num) =>{
+  let i = 0
+  let j = 0
+  let total = 0
+  let min = Infinity
+  while(i < arr.length){
+    if(total < num && j < arr.length){ 
+      total += arr[j]
+      j++
+    }else if(total >= num){
+      min = Math.min(min, j-i)
+      total -= arr[i]
+      i++
+    }else{
+      break
     }
-    
-    while (i < arr.length - 1) {
-      if (total < num) {
-        if(j < arr.length - 1) {
-        j++
-        total += arr[j]
-        }else{
-          return min === Infinity ? 0 : min
-        }
-        
-      } else {
-        min = Math.min(min, (j - i + 1))
-        total -= arr[i]
-        i++
-      }
-    }
-   return min
   }
+  return min === Infinity ? null : min
+}
+
+minSubArrayLength([1,1, 1,1 ,1 ,16, 42, 21, 2, 122], 140)
