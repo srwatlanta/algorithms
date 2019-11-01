@@ -100,7 +100,7 @@ class BST{
     return tree
   }
   
-  depthFirstSearchInOrder(){
+  depthFirstSearchInOrder(k){
     let tree = []
     let current = this.root
     function traverse(node){
@@ -109,7 +109,7 @@ class BST{
       if(node.right) traverse(node.right)
     }
     traverse(current)
-    return tree
+    return tree[k-1]
   }
   
 }
