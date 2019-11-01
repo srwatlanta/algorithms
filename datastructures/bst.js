@@ -61,5 +61,55 @@ class BST{
     }
     return found
   }
+
+  breadthFirstSearch(){
+    let queue = []
+    let tree = []
+    let current = this.root
+    queue.push(this.root)
+    while(queue.length){
+      current = queue.shift()
+      tree.push(current.value)
+      if(current.left) queue.push(current.left)
+      if(current.right) queue.push(current.right)
+    }
+    return tree
+  }
+  
+  depthFirstSearchPreOrder(){
+    let tree = []
+    let current = this.root
+    function traverse(node){
+      tree.push(node.value)
+      if(node.left) traverse(node.left)
+      if(node.right) traverse(node.right)
+    }
+    traverse(current)
+    return tree
+  }
+  
+  depthFirstSearchPostOrder(){
+    let tree = []
+    let current = this.root
+    function traverse(node){
+      if(node.left) traverse(node.left)
+      if(node.right) traverse(node.right)
+      tree.push(node.value)
+    }
+    traverse(current)
+    return tree
+  }
+  
+  depthFirstSearchInOrder(){
+    let tree = []
+    let current = this.root
+    function traverse(node){
+      if(node.left) traverse(node.left)
+      tree.push(node.value)
+      if(node.right) traverse(node.right)
+    }
+    traverse(current)
+    return tree
+  }
   
 }
