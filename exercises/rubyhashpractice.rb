@@ -48,3 +48,14 @@ def group_by_marks(marks, pass_marks)
           v > pass_marks ? "Passed" : "Failed"
       end
   end
+
+  def mask_article(string, word_list)
+    word_list.each do |word|
+        string.gsub!(/#{word}/, strike(word))
+    end
+    string
+end
+
+def strike(s)
+    "<strike>#{s}</strike>"
+end
