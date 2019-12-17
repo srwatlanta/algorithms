@@ -16,4 +16,5 @@ def binary_gap(num)
   p max
 end
 
+
 binary_gap("100010000010001")
