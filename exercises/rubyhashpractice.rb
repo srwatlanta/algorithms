@@ -122,3 +122,45 @@ def keep_arr(arr)
   # keep all non negative elements ( >= 0)
   arr.keep_if { |val| val >= 0 }
 end
+
+def process_text(array)
+  newArr = array.map do |word|
+    word.strip()
+  end
+  newArr.join(" ")
+end
+
+def factorial
+  yield   
+end
+
+n = gets.to_i
+factorial do 
+  puts (1..n).reduce(:*)
+end
+
+def square_of_sum (my_array, proc_square, proc_sum)
+  sum = proc_sum.call(my_array)
+  proc_square.call(sum)
+end
+
+proc_square_number = proc {|num| num * num}
+proc_sum_array     = proc {|arr| arr.reduce(:+)}
+my_array = gets.split().map(&:to_i)
+
+puts square_of_sum(my_array, proc_square_number, proc_sum_array)
+
+# Write a lambda which takes an integer and square it
+square      = ->(num){num ** 2}
+
+# Write a lambda which takes an integer and increment it by 1
+plus_one    = ->(num){num += 1} 
+
+# Write a lambda which takes an integer and multiply it by 2
+into_2      = ->(num){num *= 2}
+
+# Write a lambda which takes two integers and adds them
+adder       = ->(a, b){a + b}
+
+# Write a lambda which takes a hash and returns an array of hash values
+values_only = ->(hash){return hash.values}
