@@ -131,36 +131,90 @@ def process_text(array)
 end
 
 def factorial
-  yield   
+  yield
 end
 
 n = gets.to_i
-factorial do 
+factorial do
   puts (1..n).reduce(:*)
 end
 
-def square_of_sum (my_array, proc_square, proc_sum)
+def square_of_sum(my_array, proc_square, proc_sum)
   sum = proc_sum.call(my_array)
   proc_square.call(sum)
 end
 
-proc_square_number = proc {|num| num * num}
-proc_sum_array     = proc {|arr| arr.reduce(:+)}
+proc_square_number = proc { |num| num * num }
+proc_sum_array = proc { |arr| arr.reduce(:+) }
 my_array = gets.split().map(&:to_i)
 
 puts square_of_sum(my_array, proc_square_number, proc_sum_array)
 
 # Write a lambda which takes an integer and square it
-square      = ->(num){num ** 2}
+square = ->(num) { num ** 2 }
 
 # Write a lambda which takes an integer and increment it by 1
-plus_one    = ->(num){num += 1} 
+plus_one = ->(num) { num += 1 }
 
 # Write a lambda which takes an integer and multiply it by 2
-into_2      = ->(num){num *= 2}
+into_2 = ->(num) { num *= 2 }
 
 # Write a lambda which takes two integers and adds them
-adder       = ->(a, b){a + b}
+adder = ->(a, b) { a + b }
 
 # Write a lambda which takes a hash and returns an array of hash values
-values_only = ->(hash){return hash.values}
+values_only = ->(hash) { return hash.values }
+
+def block_message_printer
+  message = "Welcome to Block Message Printer"
+  if block_given?
+    yield
+  end
+  puts "But in this function/method message is :: #{message}"
+end
+
+message = gets
+block_message_printer { puts "This message remembers message :: #{message}" }
+
+#####################################################################################
+
+def proc_message_printer(my_proc)
+  message = "Welcome to Proc Message Printer"
+  my_proc.call              #Call my_proc
+  puts "But in this function/method message is :: #{message}"
+end
+
+my_proc = proc { puts "This message remembers message :: #{message}" }
+proc_message_printer(my_proc)
+
+######################################################################################
+
+def lambda_message_printer(my_lambda)
+  message = "Welcome to Lambda Message Printer"
+  my_lambda.call              #Call my_lambda
+  puts "But in this function/method message is :: #{message}"
+end
+
+my_lambda = -> { puts "This message remembers message :: #{message}" }
+lambda_message_printer(my_lambda)
+
+combination = ->(first_value) do
+  ->(second_value) do
+    term1 = (1..second_value).reduce(:*)
+    term2 = (1..(first_value - second_value)).reduce(:*)
+    divisor = term1 * term2
+    operator = (1..first_value).reduce(:*)
+    operator / divisor
+  end
+end
+
+power_function = -> (x, z) {
+  (x) ** z
+}
+
+base = gets.to_i
+raise_to_power = power_function.curry.(base)
+
+power = gets.to_i
+puts raise_to_power.(power)
+
