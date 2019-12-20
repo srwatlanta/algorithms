@@ -208,7 +208,7 @@ combination = ->(first_value) do
   end
 end
 
-power_function = -> (x, z) {
+power_function = ->(x, z) {
   (x) ** z
 }
 
@@ -218,3 +218,111 @@ raise_to_power = power_function.curry.(base)
 power = gets.to_i
 puts raise_to_power.(power)
 
+array = []
+array_1 = [nil]
+array_2 = Array.new(2, 10)
+
+def element_at(arr, index)
+  # return the element of the Array variable `arr` at the position `index`
+  # arr.at(index) # or
+  # arr[index]
+  arr[index]
+end
+
+def inclusive_range(arr, start_pos, end_pos)
+  # return the elements of the Array variable `arr` between the start_pos and end_pos (both inclusive)
+  arr[start_pos..end_pos]
+end
+
+def non_inclusive_range(arr, start_pos, end_pos)
+  # return the elements of the Array variable `arr`, start_pos inclusive and end_pos exclusive
+  arr[start_pos...end_pos]
+end
+
+def start_and_length(arr, start_pos, length)
+  # return `length` elements of the Array variable `arr` starting from `start_pos`
+  arr[start_pos, length]
+end
+
+def neg_pos(arr, index)
+  # return the element of the array at the position `index` from the end of the list
+  arr[-index]
+end
+
+def first_element(arr)
+  # return the first element of the array
+  arr.first
+end
+
+def last_element(arr)
+  # return the last element of the array
+  arr.last
+end
+
+def first_n(arr, n)
+  # return the first n elements of the array
+  arr.take(n)
+end
+
+def drop_n(arr, n)
+  # drop the first n elements of the array and return the rest
+  arr.drop(n)
+end
+
+def end_arr_add(arr, element)
+  # Add `element` to the end of the Array variable `arr` and return `arr`
+  arr.push(element)
+end
+
+def begin_arr_add(arr, element)
+  # Add `element` to the beginning of the Array variable `arr` and return `arr`
+  arr.unshift(element)
+end
+
+def index_arr_add(arr, index, element)
+  # Add `element` at position `index` to the Array variable `arr` and return `arr`
+  arr.insert(index, element)
+end
+
+def index_arr_multiple_add(arr, index)
+  # add any two elements to the arr at the index
+  arr.insert(index, 1, 4)
+end
+
+def end_arr_delete(arr)
+  # delete the element from the end of the array and return the deleted element
+  arr.pop
+end
+
+def start_arr_delete(arr)
+  # delete the element at the beginning of the array and return the deleted element
+  arr.shift
+end
+
+def delete_at_arr(arr, index)
+  # delete the element at the position #index
+  arr.delete_at(index)
+end
+
+def delete_all(arr, val)
+  # delete all the elements of the array where element = val
+  arr.delete(val)
+end
+
+def skip_animals(animals, skip)
+  # Your code here
+  newArr = []
+  animals.each_with_index do |item, index|
+    if index >= skip
+      newArr.push("#{index}:#{item}")
+    end
+  end
+  newArr
+end
+
+def rot13(secret_messages)
+  # your code here
+  secret_messages.map do |message|
+    message.tr("abcdefghijklmnopqrstuvwxyz", "nopqrstuvwxyzabcdefghijklm")
+  end
+end
