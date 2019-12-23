@@ -326,3 +326,25 @@ def rot13(secret_messages)
     message.tr("abcdefghijklmnopqrstuvwxyz", "nopqrstuvwxyzabcdefghijklm")
   end
 end
+
+def full_name(first, *rest)
+  string = first
+  rest.each do |word|
+    string.concat(" #{word}")
+  end
+  string
+end
+
+def convert_temp(temp, input_scale:, output_scale: "Celsius")
+  case input_scale.downcase
+  when "fahrenheit"
+    return output_scale == "kelvin" ?
+             ((temp - 32) / 1.8) + 273.15 : (temp - 32) / 1.8
+  when "celsius"
+    return output_scale == "kelvin" ?
+             temp + 273.15 : (temp * 1.8) + 32
+  when "kelvin"
+    return output_scale == "celsius" ?
+             temp - 273.15 : (temp - 273.15) * 1.8
+  end
+end
